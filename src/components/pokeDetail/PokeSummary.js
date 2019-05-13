@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 import fetchDescription from "../../store/actions/fetchDescription";
 import PokeData from "./PokeData";
 import { fetchHabitat } from "../../store/actions/fetchPokedexAction";
+import NotFoundPage from "../../server/NotFoundPage";
+// import NotFoundPage from "../../server/NotFoundPage";
 
 class PokeSummary extends Component {
   async componentDidMount() {
     const id = this.props.match.params.id;
+
     await this.props.fetch(id);
     await this.props.fetchHabit(id);
   }
@@ -19,7 +22,7 @@ class PokeSummary extends Component {
   }
 }
 
-const mapState = state => {
+const mapState = (state, ownProps) => {
   return {
     description: state.description.description,
     habit: state.pokedexData.habitat

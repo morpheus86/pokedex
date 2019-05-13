@@ -1,9 +1,11 @@
 import Pokedex from "../components/pokemon/Pokedex";
 import PokeSummary from "../components/pokeDetail/PokeSummary";
+import App from "../App";
+import NotFoundPage from "../server/NotFoundPage";
 
-export const globalRoutes = [
+const Routes = [
   {
-    component: Pokedex,
+    component: App,
     routes: [
       {
         path: "/",
@@ -17,7 +19,13 @@ export const globalRoutes = [
       {
         path: "/pokemon/:name",
         component: PokeSummary
+      },
+      {
+        path: "/pokemon/notfound",
+        component: NotFoundPage
       }
     ]
   }
 ];
+
+export default Routes;

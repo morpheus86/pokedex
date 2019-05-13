@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchByName } from "../../store/actions/fetchPokedexAction";
 import { withRouter } from "react-router";
+import NotFoundPage from "../../server/NotFoundPage";
 
 class SearchBar extends Component {
   state = {
@@ -20,6 +21,7 @@ class SearchBar extends Component {
     this.props.history.push(`/pokemon/${this.state.input}`);
     e.target.reset();
   };
+
   render() {
     return (
       <div>
@@ -38,7 +40,8 @@ class SearchBar extends Component {
 const mapState = (state, ownProps) => {
   return {
     singlePokemon: state.pokedexData.poke,
-    fetched: state.pokedexData.getPoke
+    fetched: state.pokedexData.getPoke,
+    pokemonArray: state.pokedexData.pokemon.results
   };
 };
 

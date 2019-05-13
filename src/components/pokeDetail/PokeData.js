@@ -10,7 +10,6 @@ export default function PokeData(props) {
     types.map(t => {
       return (
         <div className="monster-details" key={t.type.name}>
-          <strong>type: </strong>
           <span>{t.type.name}</span>
         </div>
       );
@@ -25,13 +24,7 @@ export default function PokeData(props) {
         </div>
       );
     });
-  const habitat =
-    props.habit.results &&
-    props.habit.results
-      .map(h => {
-        return h.name;
-      })
-      .join(", ");
+  const habitat = props.habit && props.habit;
   return (
     <div className="container section pokemon-details">
       <div className="card z-depth-0">

@@ -20,9 +20,7 @@ export default class SinglePokemon extends Component {
     });
   }
   render() {
-    const { imgUrl, name, imgLoading } = this.state;
-    // const image = imgLoading ? <Circular /> : null;
-
+    const { imgUrl, name } = this.state;
     return (
       <Col m={3} s={6} xs={2}>
         <Card

@@ -36,7 +36,11 @@ const pokedexReducer = (state = iniState, action) => {
       };
     case "FETCH_BY_NAME_ERROR":
       console.log("FETCH_BY_NAME_ERROR");
-      return state;
+
+      return {
+        ...state,
+        poke: null
+      };
     default:
       return state;
   }

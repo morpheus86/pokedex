@@ -1,17 +1,23 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDom from "react-dom";
 import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./store/reducer/index";
 import { createStore } from "redux";
 import { middleware } from "./store/reducer/index";
 import { Provider } from "react-redux";
+import { renderRoutes } from "react-router-config";
 
-const store = createStore(rootReducer, middleware);
-ReactDOM.render(
+import Routes from "./globalRoutes/Routes";
+import { BrowserRouter } from "react-router-dom";
+
+const state = window.__PRELOADED_STATE__;
+delete window.__PRELOADED_STATE__;
+export const store = createStore(rootReducer, state, middleware);
+
+ReactDom.hydrate(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>{renderRoutes(Routes)}</BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );
