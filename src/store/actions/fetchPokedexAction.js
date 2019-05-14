@@ -36,3 +36,17 @@ export const fetchByName = name => {
     }
   };
 };
+
+export const fetchSpecies = id => {
+  return async dispatch => {
+    try {
+      const url = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
+      // const speciesList = await P.getPokemonSpeciesList();
+      const species = await axios.get(url);
+      const speciesList = species.data;
+      dispatch({ type: "FETCH_SPECIES_LIST", speciesList });
+    } catch (error) {
+      dispatch({ type: "SPECIES_LIST_ERROR", error });
+    }
+  };
+};

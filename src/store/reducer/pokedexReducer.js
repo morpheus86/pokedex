@@ -5,6 +5,7 @@ const iniState = {
   pokemon: [],
   habitat: [],
   poke: [],
+  species: "",
   getPoke: false
 };
 
@@ -22,8 +23,7 @@ const pokedexReducer = (state = iniState, action) => {
     case "FETCH_HABITAT":
       return {
         ...state,
-        habitat: action.habitat,
-        isFetched: true
+        habitat: action.habitat
       };
     case "FETCH_HABITAT_ERROR":
       console.log("FETCH HABITAT ERRORS");
@@ -36,11 +36,14 @@ const pokedexReducer = (state = iniState, action) => {
       };
     case "FETCH_BY_NAME_ERROR":
       console.log("FETCH_BY_NAME_ERROR");
-
+      return state;
+    case "FETCH_SPECIES_LIST":
       return {
         ...state,
-        poke: null
+        isFetching: true,
+        species: action.speciesList
       };
+
     default:
       return state;
   }

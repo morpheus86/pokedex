@@ -2,75 +2,178 @@ import React from "react";
 import Evolution from "./Evolution";
 
 export default function PokeData(props) {
-  const { abilities, name, height, weight, types, stats, id } = props.data;
+  const {
+    abilities,
+    name,
+    height,
+    weight,
+    types,
+    stats,
+    id,
+    sprites
+  } = props.data;
+  const pokeName = name && name[0].toUpperCase() + name.substring(1);
   const abilityName =
     abilities && abilities.map(ab => ab.ability.name).join(", ");
   const type =
     types &&
     types.map(t => {
       return (
-        <div className="monster-details" key={t.type.name}>
+        <div key={t.type.name} className="badge badge-pill mr-1">
           <span>{t.type.name}</span>
         </div>
       );
     });
+
   const stat =
     stats &&
     stats.map(st => {
       return (
-        <div className="monster-details" key={st.stat.name}>
-          <strong>{st.stat.name}: </strong>
-          <span>{st.base_stat}</span>
+        <div className="row align-items-center" key={st.stat.name}>
+          <div className={`col-12 col-md-${3}`}>{st.stat.name}:</div>
+          <div className={`col-12 col-md${9}`}>
+            <div className="progress">
+              <div
+                className="progress-bar "
+                style={{
+                  width: `${st.base_stat}%`,
+                  backgroundColor: `#c2185b`
+                }}
+                role="progressbar"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <small>{st.base_stat}</small>
+              </div>
+            </div>
+          </div>
         </div>
       );
     });
   const habitat = props.habit && props.habit;
+  const img = sprites && sprites.front_shiny;
+  const ev =
+    stats &&
+    stats.map(st => {
+      if (st.effort > 0) {
+        return `${st.effort} ${st.stat.name}, `;
+      } else {
+        return false;
+      }
+    });
+
+  const catchRate = props.species && props.species.capture_rate;
+  const egg_group =
+    props.species && props.species.egg_groups.map(el => el.name).join(", ");
+  const hash_step = props.species && props.species.hatch_counter;
+
   return (
-    <div className="container section pokemon-details">
-      <div className="card z-depth-0">
-        <div className="card-content">
-          <div className="card-title">
-            <h1 className="detail-panel-header overflow-y red-text">{name}</h1>
-            <div className="detail-panel-content">
-              <div className="detail-picture">
-                {stat}
-                <div className="more-detail-info">
-                  <div className="monster-species" />
-                  <div className="monster-description flow-text indigo-text text-darken-4" />
-                  <h2 className="row detail-subheader">Type</h2>
-                  <div className="monster-details">{type}</div>
-                  <div className="monster-description flow-text indigo-text text-darken-4" />
-                  <h2 className="row detail-subheader">Profile</h2>
-                  <div className="monster-details">
-                    <strong>weight: </strong>
-                    <span>{weight}</span>
-                    <strong>height: </strong>
-                    <span>{height}</span>
+    <div className="col">
+      <div className="card">
+        <div className="card-header">
+          <div className="row">
+            <div className="card-title">{pokeName}</div>
+            <div className="col">
+              <div className="card-header">
+                <div className="row">
+                  <div className="col-5">
+                    <h5>{id}</h5>
                   </div>
-                  <div className="monster-details">
-                    <strong>catchRate: </strong>
-                    <span>result</span>
-                    <strong>Egg groups: </strong>
-                    <span>result</span>
+                  <div className="col-7">
+                    <div className="float-right">{type}</div>
                   </div>
-                  <div className="monster-details">
-                    <strong>abilities: </strong>
-                    <span>{abilityName}</span>
-                    <strong>EVs: </strong>
-                    <span>result</span>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className="row align-items-center">
+                  <div className=" col-md-3 ">
+                    <img
+                      src={img}
+                      className="card-img-top rounded mx-auto mt-2"
+                    />
                   </div>
-                  <div className="monster-description flow-text indigo-text text-darken-4" />
-                  <h2 className="row detail-subheader">Habitat</h2>
-                  <div className="monster-details">
-                    <strong>habitat: </strong>
-                    <span>{habitat}</span>
-                  </div>
-                  <h2 className="detail-subheader">Evolution</h2>
-                  <div className="row evolution">
-                    <div className="row evolution-row">
-                      <Evolution index={id} />
+                  <div className="col-md-9">{stat}</div>
+                  <div className="row mt-1" />
+                </div>
+                <hr />
+                <div className="card-body">
+                  <h5 className="card-title text-center">Profile</h5>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="row">
+                        <div className="col-6">
+                          <h6 className="float-right">Height:</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-left">{height} ft.</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-right">Weight:</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-left">{weight} lbs</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-right">Catch Rate:</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-left">{catchRate}%</h6>
+                        </div>
+                        <div className="col-6" />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="row">
+                        <div className="col-6">
+                          <h6 className="float-right">Egg Groups:</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-left">{egg_group} </h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-right">Hatch Steps:</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-left">{hash_step}</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-right">Abilities:</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-left">{abilityName}</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-right">EVs:</h6>
+                        </div>
+                        <div className="col-6">
+                          <h6 className="float-left">{ev}</h6>
+                        </div>
+                      </div>
+                      <div>
+                        <h5 className="card-title text-center">Habitat</h5>
+                      </div>
+                      <div className="row">
+                        <div className="col-6">
+                          <h6 className="float-left">habitat: {habitat}</h6>
+                        </div>
+                      </div>
+                      <div className="row evolution-row">
+                        <h5 className="card-title text-center">Evolution</h5>
+                        <Evolution index={id} />
+                      </div>
                     </div>
                   </div>
+                </div>
+                <div class="card-footer text-muted">
+                  Data From{" "}
+                  <a
+                    href="https://pokeapi.co/"
+                    target="_blank"
+                    className="card-link"
+                  >
+                    PokeAPI.co
+                  </a>
                 </div>
               </div>
             </div>
