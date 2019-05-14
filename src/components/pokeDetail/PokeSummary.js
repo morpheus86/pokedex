@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import fetchDescription from "../../store/actions/fetchDescription";
 import PokeData from "./PokeData";
 import { fetchHabitat } from "../../store/actions/fetchPokedexAction";
-import NotFoundPage from "../../server/NotFoundPage";
-// import NotFoundPage from "../../server/NotFoundPage";
 
 class PokeSummary extends Component {
   async componentDidMount() {

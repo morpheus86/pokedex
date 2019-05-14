@@ -1,4 +1,5 @@
 const initState = {
+  name: "",
   pokemonIdx: "",
   img: "",
   imageLoading: false,
@@ -24,8 +25,8 @@ const pokemonImgReducer = (state = initState, action) => {
         ...state,
         pokemonIdx: action.index,
         isLoaded: true,
-        imgChain: [...state.imgChain, action.imgChain],
-        evoChainData: [...state.evoChainData, action.evo]
+        imgChain: action.imgChain,
+        evoChainData: [...state.evoChainData, action.response]
       };
     case "FETCH_EVO_CHAIN_ERROR":
       console.log("Fetching Error");

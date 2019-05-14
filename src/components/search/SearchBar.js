@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchByName } from "../../store/actions/fetchPokedexAction";
 import { withRouter } from "react-router";
-import NotFoundPage from "../../server/NotFoundPage";
 
 class SearchBar extends Component {
   state = {

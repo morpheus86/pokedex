@@ -22,7 +22,6 @@ export class Evolution extends Component {
   }
 
   render() {
-    console.log(this.props);
     const image = this.props.img;
     const source = image && image;
     const evolutionImg = this.props.img2;
@@ -32,13 +31,13 @@ export class Evolution extends Component {
         <div className="evolution-row">
           <div className="evolution-row-inner">
             <div className="evolution-sprite monster-sprite">
-              <img src={source} />
+              <img src={source} alt="" />
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" className="svg">
               <path d="M24 16V8l16 16-16 16v-8H8V16z" />
             </svg>
             <div className="evolution-sprite monster-sprite">
-              <img src={evolving} />
+              <img src={evolving} alt="" />
             </div>
           </div>
           <div className="evolution-label">

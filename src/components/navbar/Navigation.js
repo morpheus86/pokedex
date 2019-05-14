@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import About from "./About";
 
 export default function Navigation() {
   return (
@@ -9,7 +8,6 @@ export default function Navigation() {
         <Link to="/" className="home-page">
           Pokedex
         </Link>
-        <About />
       </div>
     </nav>
   );

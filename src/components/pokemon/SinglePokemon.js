@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardTitle, Col, Circular } from "react-materialize";
+import { Card, CardTitle, Col } from "react-materialize";
 
 export default class SinglePokemon extends Component {
   state = {
